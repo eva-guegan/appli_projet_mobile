@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <h3>Where to watch my series ?</h3>
-    <img src="../assets/disney_plus.png" alt="Logo disney plus" />
-    <img src="../assets/amazon.png" alt="Logo amazon" />
-    <img src="../assets/netflix.png" alt="Logo netflix" />
+    <img src="public/img/disney_plus.png" alt="Logo disney plus" />
+    <img src="public/img/amazon.png" alt="Logo amazon" />
+    <img src="public/img/netflix.png" alt="Logo netflix" />
     <br />
 
     <Search @searchShowByName="listShows"/>
