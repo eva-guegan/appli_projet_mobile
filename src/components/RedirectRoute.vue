@@ -18,15 +18,19 @@ export default {
   },
   data() {
     return {
-      user: null,
+      user:"",
       errorMessage: ""
     };
+  },
+  beforeCreate() {
+    localStorage.removeItem('user')
   },
 
   methods: {
     // TODO requete api
     login({ email, password }){
       this.user = login(email, password);
+      localStorage.setItem('user',this.user);
       this.errorMessage = this.user ? "" : "Authentication failed, please try again";
     }
   },
