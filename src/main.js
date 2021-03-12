@@ -1,10 +1,13 @@
 import Vue from 'vue'
-import VueSession from 'vue-session'
 import RedirectRoute from './components/RedirectRoute'
 import './registerServiceWorker'
 import router from './router'
 
-//BootstrapVue
+// Session
+import VueSession from 'vue-session'
+Vue.use(VueSession)
+
+// BootstrapVue
 import { BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -16,8 +19,6 @@ import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
-Vue.use(BootstrapVue)
-Vue.use(VueSession)
 
 new Vue({
   router,
@@ -29,6 +30,13 @@ new Vue({
       baseApi: 'https://api.betaseries.com/shows/',
       paramObligatoire: '?v=3.0&key=3b28f318f73e',
       baseUserApi: 'http://localhost:8081/',
+      test: {
+        nom: 'azerty',
+        prenom: 'prenom',
+        email: 'mail',
+        mdp: 'mdp',
+        isAdmin: 'isAdmin'
+      }
     }
   },
   render: h => h(RedirectRoute)

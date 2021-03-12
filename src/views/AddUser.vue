@@ -1,39 +1,40 @@
 <template>
   <div>
-
     <h3>Ajouter un utilisateur</h3>
-    <br />
 
 <!--    <b-form-input v-model="nom" type="text" :state="stateNom" aria-describedby="nom-feedback" trim placeholder="Enter your last name"></b-form-input>-->
 <!--    <b-form-invalid-feedback id="nom-feedback">Enter at least 3 letters</b-form-invalid-feedback>-->
 <!--    <br />-->
 
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="nom" label="Nom :" label-for="input-nom">
-        <b-form-input id="input-nom" v-model="form.nom" type="text" aria-describedby="nom-feedback" placeholder="Enter your last name" required></b-form-input>
+    <b-form class="input" @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form-group id="nom" label-for="input-nom">
+        <b-form-input id="input-nom" v-model="form.nom" type="text" aria-describedby="nom-feedback" placeholder="Entrer le nom" required></b-form-input>
+      </b-form-group>
+      <br />
+
+      <b-form-group id="prenom" label-for="input-prenom">
+        <b-form-input id="input-prenom" v-model="form.prenom" type="text" aria-describedby="prenom-feedback" placeholder="Entrer le prénom" required></b-form-input>
+      </b-form-group>
+      <br />
+
+      <b-form-group id="email" label-for="input-email">
+        <b-form-input id="input-email" v-model="form.email" type="email" aria-describedby="email-feedback" placeholder="Entrer l'email" required></b-form-input>
+      </b-form-group>
+      <br />
+
+      <b-form-group id="mdp" label-for="input-mdp">
+        <b-form-input id="input-mdp" v-model="form.mdp" type="password" aria-describedby="mdp-feedback" placeholder="Entrer le mot de passe" required></b-form-input>
+      </b-form-group>
+      <br />
+<!--      ToDO faire un champ valider votre mdp-->
+
+      <b-form-group id="isAdmin" label-for="input-isAdmin">
+        <b-form-select id="input-isAdmin" v-model="form.isAdmin" :options="isAdmin" required></b-form-select>
       </b-form-group>
 
-      <b-form-group id="prenom" label="Prenom :" label-for="input-prenom">
-        <b-form-input id="input-prenom" v-model="form.prenom" type="text" aria-describedby="prenom-feedback" placeholder="Enter your first name" required></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="email" label="Email :" label-for="input-email">
-        <b-form-input id="input-email" v-model="form.email" type="email" aria-describedby="email-feedback" placeholder="Enter email" required></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="mdp" label="Mot de passe :" label-for="input-mdp" description="We'll never share your password with anyone else.">
-        <b-form-input id="input-mdp" v-model="form.mdp" type="password" aria-describedby="mdp-feedback" placeholder="Enter password" required></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="isAdmin" label="Administrateur :" label-for="input-isAdmin">
-        <b-form-input id="input-isAdmin" v-model="form.isAdmin" type="text" aria-describedby="isAdmin-feedback" placeholder="Enter password" required></b-form-input>
-      </b-form-group>
-
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="submit" variant="primary">Ajouter</b-button><span>azer</span>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
-
-
 
   </div>
 </template>
@@ -86,8 +87,9 @@ export default {
         prenom: '',
         email: '',
         mdp: '',
-        isAdmin: '',
+        isAdmin: null,
       },
+      isAdmin: [{ text: 'Administrateur', value: 1 }, { text: 'Utilisateur', value: 0 }],
       show: true
     }
   },
@@ -95,13 +97,14 @@ export default {
     onSubmit(event) {
       event.preventDefault()
       this.axios
-          .post(this.$root.baseUserApi + 'newuser', {
+          .post(this.$root.baseUserApi + 'users/', {
             nom: this.form.nom,
             prenom: this.form.prenom,
             email: this.form.email,
             mdp: this.form.mdp,
             isAdmin: this.form.isAdmin
           })
+      this.$router.push('/users')
     },
     onReset(event) {
       event.preventDefault()
@@ -125,5 +128,9 @@ export default {
 #cards {
   display: grid;
   place-items: center;
+}
+
+.input{
+  margin-left: 15%;
 }
 </style>
