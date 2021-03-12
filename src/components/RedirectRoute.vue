@@ -1,24 +1,41 @@
 <template>
   <div>
-<!--    <App v-if="this.$session.get("user")"-->
-    <Login />
+    <Home v-if="user" />
+    <Login v-else :errorMessage="errorMessage" @submit="login" />
   </div>
 </template>
 
 <script>
-import Login from '@/views/Login'
+import Home from "@/views/Home";
+import Login from '@/views/Login';
+import { login } from "../auth";
 
 export default {
   name:"RedirectRoute",
   components:{
+    Home,
     Login
+  },
+  data() {
+    return {
+      user: null,
+      errorMessage: ""
+    };
+  },
+
+  methods: {
+    // TODO requete api
+    login({ email, password }){
+      this.user = login(email, password);
+      this.errorMessage = this.user ? "" : "Authentication failed, please try again";
+    }
   },
 }
 </script>
 
 <style>
 body {
-  background-image: url("../../public/img/background.jpg");
+  background-image: url("../../public/img/background.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;

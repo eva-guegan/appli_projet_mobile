@@ -3,20 +3,22 @@
     <div>
       <p class="bienvenu">Bienvenu sur</p>
       <h2 class="w2w">Where to watch my series ?</h2>
-      <b-form @submit="login">
-        <b-form-input class="input" type="email" name="email" id="email" placeholder="email"></b-form-input>
-        <b-form-input class="input" type="password" name="password" id="password" placeholder="password"></b-form-input>
-        <button type="submit" class="submit">Log in</button>
-        <p v-if="errormessage" class="errorMessage">{{errormessage}}</p>
+      <b-form @submit.prevent="login()">
+
+        <b-form-input class="input" type="email" v-model="email" />
+        <b-form-input class="input" type="password" v-model="password" />
+        <button class="submit" type="submit">Log in</button>
+
+        <p v-if="errorMessage" class="errorMessage"></p>
       </b-form>
 <!--      <p><a href="#">mot de passe oublié</a></p>-->
 <!--      <p>Pas de compte ? <br><a href="#">inscrivez - vous ici !</a></p>-->
     </div>
 
     <div class="icon-footer">
-      <img src="../../public/img/icon-netflix.png">
-      <img src="../../public/img/icon-disney.png">
-      <img src="../../public/img/icon-amazon.png">
+<!--      <img src="../../public/img/icon-netflix.png">-->
+<!--      <img src="../../public/img/icon-disney.png">-->
+<!--      <img src="../../public/img/icon-amazon.png">-->
     </div>
   </div>
 </template>
@@ -28,32 +30,26 @@ export default {
 
   data(){
     return{
-      user:{
-        name:{
-          default: null,
-        },
-      },
+      email: "",
+      password: "",
     }
-  },
-
-  components:{
-
   },
 
   methods:{
     login() {
-      this.errormessage = "connecter";
-      this.$session.set("user","toto");
+      this.$emit("submit", {
+        email: this.email,
+        password: this.password
+      });
     }
   },
 
-  props:{
-    errormessage:{
-      type:String,
-      default:"non connecter",
+  props: {
+    errorMessage: {
+      type: String,
+      default: ""
     }
   },
-
 }
 </script>
 
@@ -117,4 +113,5 @@ a:hover{
   margin-left: 14%;
   margin-bottom: 15px;
 }
+
 </style>
