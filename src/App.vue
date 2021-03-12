@@ -37,8 +37,20 @@
   color: aquamarine;
 }
 
-h3, li, p, td, th {
+h3, li, p, td, th, label {
   color: white;
+}
+
+span {
+  visibility: hidden
+}
+
+.lienBlanc {
+  color: white;
+}
+.lienBlanc:hover {
+  color: white;
+  text-decoration: none;
 }
 
 </style>

@@ -3,13 +3,14 @@
 
     <h3>Détail de l'utilisateur {{ userDetails.nom }} {{ userDetails.prenom }}</h3>
 
-    <ul id="cards">
-      <li>Nom : {{ userDetails.nom }}</li>
-      <li>Prenom : {{ userDetails.prenom }}</li>
-      <li>Mail : {{ userDetails.email }}</li>
-      <li v-if="userDetails.isAdmin">Role : Admin</li>
-      <li v-else>Role : User</li>
-    </ul>
+    <div id="cards">
+      <p><b>Nom :</b> {{ userDetails.nom }}</p>
+      <p><b>Prenom :</b> {{ userDetails.prenom }}</p>
+      <p><b>Mail :</b> {{ userDetails.email }}</p>
+      <p><b>Date d'inscription :</b> {{ userDetails.dateInscription }}</p>
+      <p v-if="isAdmin === 1"><b>Role :</b> Admin</p>
+      <p v-else><b>Role :</b> User</p>
+    </div>
 
   </div>
 </template>
@@ -20,7 +21,7 @@ export default {
   data() {
     return {
       userDetails: {},
-      displayContent: false,
+      isAdmin: {}
     }
   },
   created() {
@@ -29,17 +30,13 @@ export default {
   methods: {
     getDetails() {
       this.axios
-          .get(this.$root.baseUserApi + "user/" + this.$route.params.idUser)
+          .get(this.$root.baseUserApi + "users/" + this.$route.params.idUser)
           .then((response) => {
             this.userDetails = response.data
-            this.displayContent = true;
+            this.isAdmin = response.data.isAdmin.data[0]
             console.log(this.userDetails)
           });
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>

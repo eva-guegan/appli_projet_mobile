@@ -1,10 +1,13 @@
 import Vue from 'vue'
-import VueSession from 'vue-session'
 import RedirectRoute from './components/RedirectRoute'
 import './registerServiceWorker'
 import router from './router'
 
-//BootstrapVue
+// Session
+import VueSession from 'vue-session'
+Vue.use(VueSession)
+
+// BootstrapVue
 import { BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -16,8 +19,6 @@ import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
-Vue.use(BootstrapVue)
-Vue.use(VueSession)
 
 new Vue({
   router,
