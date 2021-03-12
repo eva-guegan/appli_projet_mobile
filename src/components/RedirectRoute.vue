@@ -32,6 +32,15 @@ export default {
     // TODO requete api
     login({ email, password }){
       this.user = login(email, password);
+
+      this.$root.test.nom = this.user.nomT
+      this.$root.test.prenom = this.user.prenomT
+      this.$root.test.email = this.user.emailT
+      this.$root.test.mdp = this.user.passwordT
+      this.$root.test.isAdmin = this.user.isAdminT
+
+      console.log(this.$root.test)
+
       localStorage.setItem('user',this.user);
       this.errorMessage = this.user ? "" : "Authentication failed, please try again";
     }
