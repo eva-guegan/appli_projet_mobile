@@ -33,7 +33,9 @@ export default {
     login({ email, password }){
       this.user = login(email, password);
       localStorage.setItem('user',this.user);
-      this.errorMessage = this.user ? "" : "Authentication failed, please try again";
+      if(this.user == null) {
+        this.errorMessage = "wrong credential";
+      }
     }
   },
 }
