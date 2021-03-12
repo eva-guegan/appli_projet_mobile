@@ -1,34 +1,35 @@
 <template>
   <div>
 
-    <h3>Modifier l'utilisateur {{ userDetails.nom }} {{ userDetails.prenom }}</h3>
+    <h3>Modifier {{ userDetails.nom }} {{ userDetails.prenom }}</h3>
     <br />
 
-    <ul id="cards">
-      <li>Nom : {{ userDetails.nom }}</li>
-      <li>Prenom : {{ userDetails.prenom }}</li>
-      <li>Mail : {{ userDetails.email }}</li>
-      <li>Role : Admin</li>
-    </ul>
+    <b-form class="input" @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form-group id="nomForm" label-for="input-nom">
+        <b-form-input id="input-nom" v-model="form.nomForm" type="text" aria-describedby="nom-feedback" placeholder="Entrer le nom" required>inopu</b-form-input>
+      </b-form-group>
+      <br />
 
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="nomForm" label="Nom :" label-for="input-nomForm">
-        <b-form-input id="input-nomForm" v-model="form.nom" type="text" aria-describedby="nomForm-feedback" placeholder="Enter your last name" required></b-form-input>
+      <b-form-group id="prenomForm" label-for="input-prenom">
+        <b-form-input id="input-prenom" v-model="form.prenomForm" type="text" aria-describedby="prenom-feedback" placeholder="Entrer le prénom" required></b-form-input>
+      </b-form-group>
+      <br />
+
+      <b-form-group id="emailForm" label-for="input-email">
+        <b-form-input id="input-email" v-model="form.emailForm" type="email" aria-describedby="email-feedback" placeholder="Entrer l'email" required></b-form-input>
+      </b-form-group>
+      <br />
+
+      <b-form-group id="mdpForm" label-for="input-mdp">
+        <b-form-input id="input-mdp" v-model="form.mdpForm" type="password" aria-describedby="mdp-feedback" placeholder="Entrer le mot de passe" required></b-form-input>
+      </b-form-group>
+      <br />
+
+      <b-form-group id="isAdminForm" label-for="input-isAdmin">
+        <b-form-select id="input-isAdmin" v-model="form.isAdminForm" :options="isAdmin" required></b-form-select>
       </b-form-group>
 
-      <b-form-group id="prenom" label="Prenom :" label-for="input-prenom">
-        <b-form-input id="input-prenom" v-model="form.prenom" type="text" aria-describedby="prenom-feedback" placeholder="Enter your first name" required></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="email" label="Email :" label-for="input-email">
-        <b-form-input id="input-email" v-model="form.email" type="email" aria-describedby="email-feedback" placeholder="Enter email" required></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="mdp" label="Mot de passe :" label-for="input-mdp" description="We'll never share your password with anyone else.">
-        <b-form-input id="input-mdp" v-model="form.mdp" type="password" aria-describedby="mdp-feedback" placeholder="Enter password" required></b-form-input>
-      </b-form-group>
-
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="submit" variant="primary">Submit</b-button> <span></span>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
 
@@ -41,13 +42,14 @@ export default {
   data() {
     return {
       userDetails : [],
-      nom: 'qsdfg',
       form: {
-        nomForm: this.nom,
-        prenom: '',
-        email: '',
-        mdp: '',
+        nomForm: '',
+        prenomForm: '',
+        emailForm: '',
+        mdpForm: '',
+        isAdminForm: '',
       },
+      isAdmin: [{ text: 'Administrateur', value: 1 }, { text: 'Utilisateur', value: 0}],
       show: true
     }
   },
@@ -57,30 +59,36 @@ export default {
   methods: {
     getDetails() {
       this.axios
-          .get(this.$root.baseUserApi + "user/" + this.$route.params.idUser)
+          .get(this.$root.baseUserApi + "users/" + this.$route.params.idUser)
           .then((response) => {
             this.userDetails = response.data
             this.form.nomForm = response.data.nom;
+            this.form.prenomForm = response.data.prenom;
+            this.form.emailForm = response.data.email;
+            this.form.mdpForm = response.data.email;
+            this.form.isAdminForm = response.data.isAdmin.data[0];
             console.log(this.userDetails)
           });
     },
     onSubmit(event) {
       event.preventDefault()
       this.axios
-          .put(this.$root.baseUserApi + 'modifuser/' + this.$route.params.idUser, {
-            nom: this.form.nom,
-            prenom: this.form.prenom,
-            email: this.form.email,
-            mdp: this.form.mdp
+          .put(this.$root.baseUserApi + 'users/' + this.$route.params.idUser, {
+            nom: this.form.nomForm,
+            prenom: this.form.prenomForm,
+            email: this.form.emailForm,
+            mdp: this.form.mdpForm,
+            isAdmin: this.form.isAdminForm
           })
+      this.$router.push('/users')
     },
     onReset(event) {
       event.preventDefault()
       // Reset our form values
-      this.form.nom = ''
-      this.form.prenom = ''
-      this.form.email = ''
-      this.form.mdp = ''
+      this.form.nomForm = ''
+      this.form.prenomForm = ''
+      this.form.emailForm = ''
+      this.form.mdpForm = ''
       // Trick to reset/clear native browser form validation state
       this.show = false
       this.$nextTick(() => {
@@ -90,10 +98,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-#cards {
-  display: grid;
-  place-items: center;
-}
-</style>

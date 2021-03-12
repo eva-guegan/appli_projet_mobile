@@ -8,7 +8,7 @@
 
     <Search @searchShowByName="listShows"/>
 
-    <div id="cards">
+    <div class="cards">
       <div v-for="show in infos.shows">
         <b-card no-body class="overflow-hidden" style="max-width: 50rem;">
           <b-row no-gutters>
@@ -75,8 +75,8 @@ export default {
 </script>
 
 <style>
-#cards {
-  display: grid;
-  place-items: center;
-}
+  .cards {
+    display: grid;
+    place-items: center;
+  }
 </style>
