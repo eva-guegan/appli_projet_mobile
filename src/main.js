@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import App from './App.vue'
+import VueSession from 'vue-session'
+import RedirectRoute from './components/RedirectRoute'
 import './registerServiceWorker'
 import router from './router'
 
@@ -15,6 +16,8 @@ import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
+Vue.use(BootstrapVue)
+Vue.use(VueSession)
 
 new Vue({
   router,
@@ -28,5 +31,5 @@ new Vue({
       baseUserApi: 'http://localhost:8081/',
     }
   },
-  render: h => h(App)
+  render: h => h(RedirectRoute)
 }).$mount('#app')
