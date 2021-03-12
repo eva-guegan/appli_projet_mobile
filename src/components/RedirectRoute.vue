@@ -1,6 +1,6 @@
 <template>
   <div>
-    <App v-if="user" />
+    <App v-if="utilisateur"/>
     <Login v-else :errorMessage="errorMessage" @submit="login" />
   </div>
 </template>
@@ -20,20 +20,16 @@ export default {
   },
   data() {
     return {
-      user:"",
+      utilisateur:"",
       errorMessage: ""
     };
-  },
-  beforeCreate() {
-    localStorage.removeItem('user')
   },
 
   methods: {
     // TODO requete api
     login({ email, password }){
-      this.user = login(email, password);
-      localStorage.setItem('user',this.user);
-      if(this.user == null) {
+      this.utilisateur = login(email, password);
+      if(this.utilisateur == null) {
         this.errorMessage = "wrong credential";
       }
     }

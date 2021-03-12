@@ -16,11 +16,18 @@ const users = [
  * @return {?Object}
  */
 function login(email, password) {
-    let id = null
+    let utilisateur = null
     if (users.find(user => user.email === email && user.password === password)){
-        id= 1;
+        utilisateur = {
+            "id":"1",
+            "nom":"toto",
+            "prenom":"tototo",
+            "email":"toto@gmail.com",
+            "password":"toto",
+            "isAdmin":"1"
+        }
     }
-    return id;
+    return utilisateur;
 }
 
 export { login };
