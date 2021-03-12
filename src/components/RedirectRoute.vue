@@ -42,7 +42,9 @@ export default {
       console.log(this.$root.test)
 
       localStorage.setItem('user',this.user);
-      this.errorMessage = this.user ? "" : "Authentication failed, please try again";
+      if(this.user == null) {
+        this.errorMessage = "wrong credential";
+      }
     }
   },
 }
