@@ -1,9 +1,7 @@
 <template>
   <div>
-
     <h3>Gestion des utilisateurs</h3>
     <br />
-<!--    voir faire barre de recherche-->
 
     <b-button variant="primary"><router-link class="lienBlanc" :to="'users/add_user'">Ajouter un user</router-link></b-button>
     <br /><br />
@@ -32,11 +30,6 @@ export default {
   data() {
     return {
       resultsApi : [],
-      fields: ['Nom', 'Prenom', 'Role', 'Detail', 'Modifier', 'Supprimer'],
-      users: [
-          //isActive not appear
-        { isActive: true, Nom: 'azerty', Prenom: 'azerty', Role: 'Admin', Detail: 'detail'},
-      ]
     }
   },
   beforeCreate() {
@@ -44,14 +37,13 @@ export default {
         .get(this.$root.baseUserApi + 'users/')
         .then(res => {
           this.resultsApi = res.data;
-          console.log(this.resultsApi);
         })
   },
   methods: {
     deleteUser(idUser) {
       this.axios
           .delete(this.$root.baseUserApi + 'users/' + idUser)
-    }
+    },
   }
 }
 </script>
