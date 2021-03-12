@@ -25,6 +25,7 @@ new Vue({
       //platforms= idPlateform pour affciher les séries présente que sur certaine plateforme
       baseApi: 'https://api.betaseries.com/shows/',
       paramObligatoire: '?v=3.0&key=3b28f318f73e',
+      baseUserApi: 'http://localhost:8081/',
     }
   },
   render: h => h(App)
