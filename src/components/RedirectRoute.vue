@@ -1,11 +1,12 @@
 <template>
   <div>
-    <Home v-if="user" />
+    <App v-if="user" />
     <Login v-else :errorMessage="errorMessage" @submit="login" />
   </div>
 </template>
 
 <script>
+import App from "@/App";
 import Home from "@/views/Home";
 import Login from '@/views/Login';
 import { login } from "../auth";
@@ -13,6 +14,7 @@ import { login } from "../auth";
 export default {
   name:"RedirectRoute",
   components:{
+    App,
     Home,
     Login
   },
