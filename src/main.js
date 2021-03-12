@@ -20,7 +20,7 @@ Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
-let vue = new Vue({
+new Vue({
   router,
   data() {
     return {

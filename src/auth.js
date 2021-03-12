@@ -17,6 +17,7 @@ const users = [
  */
 function login(email, password) {
     let user = null
+    // appel api
     if (users.find(user => user.email === email && user.password === password)){
         user = {
             "idT":"1",
