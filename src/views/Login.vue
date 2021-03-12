@@ -10,11 +10,8 @@
         <b-form-input class="input" type="password" v-model="password" />
         <button class="submit" type="submit">Log in</button>
 
-<!--        affiche du message d'erreur-->
         <p v-if="errorMessage" class="errorMessage">{{errorMessage}}</p>
       </b-form>
-<!--      <p><a href="#">mot de passe oublié</a></p>-->
-<!--      <p>Pas de compte ? <br><a href="#">inscrivez - vous ici !</a></p>-->
     </div>
 
     <div class="icon-footer">

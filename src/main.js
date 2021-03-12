@@ -30,12 +30,13 @@ new Vue({
       baseApi: 'https://api.betaseries.com/shows/',
       paramObligatoire: '?v=3.0&key=3b28f318f73e',
       baseUserApi: 'http://localhost:8081/',
-      test: {
-        nom: 'azerty',
-        prenom: 'prenom',
-        email: 'mail',
-        mdp: 'mdp',
-        isAdmin: 'isAdmin'
+      user: {
+        id: '',
+        nom: '',
+        prenom: '',
+        email: '',
+        mdp: '',
+        isAdmin: ''
       }
     }
   },
