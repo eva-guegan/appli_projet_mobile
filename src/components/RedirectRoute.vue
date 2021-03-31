@@ -1,48 +1,56 @@
 <template>
   <div>
-    <App v-if="user" />
+    <App v-if="this.$root.user.id"/>
     <Login v-else :errorMessage="errorMessage" @submit="login" />
   </div>
 </template>
 
 <script>
 import App from "@/App";
-import Home from "@/views/Home";
 import Login from '@/views/Login';
-import { login } from "../auth";
 
 export default {
   name:"RedirectRoute",
   components:{
     App,
-    Home,
     Login
   },
   data() {
     return {
-      user:"",
+      result: '',
       errorMessage: ""
     };
   },
-  beforeCreate() {
-    localStorage.removeItem('user')
-  },
 
   methods: {
-    // TODO requete api
     login({ email, password }){
-      this.user = login(email, password);
+      this.loginApi(email, password);
 
-      this.$root.test.nom = this.user.nomT
-      this.$root.test.prenom = this.user.prenomT
-      this.$root.test.email = this.user.emailT
-      this.$root.test.mdp = this.user.passwordT
-      this.$root.test.isAdmin = this.user.isAdminT
+      if(this.user === null) {
+        this.errorMessage = "wrong credential";
+      }
+    },
+    loginApi(email, password) {
 
-      console.log(this.$root.test)
-
-      localStorage.setItem('user',this.user);
-      this.errorMessage = this.user ? "" : "Authentication failed, please try again";
+      this.axios
+          .get(this.$root.baseUserApi + 'login/', {
+            params: {
+              email: email,
+              mdp: password
+            }
+          })
+          .then(res => {
+            this.result = res.data;
+            console.log(res.data)
+          })
+      // if (this.result){
+        this.$root.user.id = '0cf0a5b8-d529-48d1-8ea6-ed6cd62d772c'
+        this.$root.user.nom = this.result.nom
+        this.$root.user.prenom = this.result.prenom
+        this.$root.user.email = this.result.email
+        this.$root.user.mdp = this.result.mdp
+        this.$root.user.isAdmin = this.result.isAdmin
+      // }
     }
   },
 }

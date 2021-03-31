@@ -5,6 +5,7 @@ import Users from '../views/Users.vue'
 import DetailUsers from '../views/DetailUser.vue'
 import AddUser from '../views/AddUser.vue'
 import UpdateUser from '../views/UpdateUser.vue'
+import Profil from "@/views/Profil";
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,12 @@ const routes = [
     name: 'UpdateUser',
     component: UpdateUser
   },
+  {
+    path: '/profil/:idUser',
+    name: 'profil',
+    component: Profil,
+
+  }
 ]
 
 const router = new VueRouter({
