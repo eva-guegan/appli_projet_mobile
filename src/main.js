@@ -20,7 +20,7 @@ Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
-new Vue({
+let vue = new Vue({
   router,
   data() {
     return {
@@ -30,13 +30,12 @@ new Vue({
       baseApi: 'https://api.betaseries.com/shows/',
       paramObligatoire: '?v=3.0&key=3b28f318f73e',
       baseUserApi: 'http://localhost:8081/',
-      user: {
-        id: '',
-        nom: '',
-        prenom: '',
-        email: '',
-        mdp: '',
-        isAdmin: ''
+      test: {
+        nom: 'azerty',
+        prenom: 'prenom',
+        email: 'mail',
+        mdp: 'mdp',
+        isAdmin: 'isAdmin'
       }
     }
   },

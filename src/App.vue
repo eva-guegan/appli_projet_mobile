@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Accueil</router-link> |
-      <router-link :to="{ name: 'profil', params: {idUser: this.$root.user.id } }" >Mon profil</router-link> |
+      <router-link to="/profil">Mon profil</router-link> |
       <router-link to="/users">Liste utilisateurs</router-link> |
     </div>
     <router-view/>
